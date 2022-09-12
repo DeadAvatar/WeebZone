@@ -25,7 +25,7 @@ page = """
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Torrent File Selector</title>
-    <link rel="icon" href="https://graph.org/file/1a6ad157f55bc42b548df.png" type="image/jpg">
+    <link rel="icon" href="https://te.legra.ph/file/8fba2896a8e4e5704606b.jpg" type="image/jpg">
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
@@ -226,15 +226,15 @@ function s_validate() {
     <header>
       <div class="brand">
         <img
-          src="https://graph.org/file/1a6ad157f55bc42b548df.png"
+          src="https://te.legra.ph/file/8fba2896a8e4e5704606b.jpg"
           alt="logo"
         />
-        <a href="https://t.me/krn2701">
+        <a href="https://t.me/PublicLeechCloneGroup">
           <h2 class="name">Qbittorrent Selection</h2>
         </a>
       </div>
       <div class="social">
-        <a href="https://github.com/codewithweeb/mirror-with-weeb"><i class="fab fa-github"></i></a>
+        <a href="https://t.me/PublicLeechCloneGroup"><i class="fab fa-github"></i></a>
         <a href="https://t.me/krn2701"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
@@ -422,7 +422,7 @@ code_page = """
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Torrent Code Checker</title>
-    <link rel="icon" href="https://graph.org/file/1a6ad157f55bc42b548df.png" type="image/jpg">
+    <link rel="icon" href="https://te.legra.ph/file/8fba2896a8e4e5704606b.jpg" type="image/jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -626,8 +626,8 @@ section span{
         </a>
       </div>
       <div class="social">
-        <a href="https://github.com/codewithweeb/mirror-with-weeb"><i class="fab fa-github"></i></a>
-        <a href="https://t.me/krn2701"><i class="fab fa-telegram"></i></a>
+        <a href="https://t.me/PublicLeechCloneGroup"><i class="fab fa-github"></i></a>
+        <a href="https://t.me/PublicLeechCloneGroup"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
     <section>
@@ -779,7 +779,7 @@ def set_priority(id_):
 
 @app.route('/')
 def homepage():
-    return "<h1>See mirror-with-weeb <a href='https://github.com/codewithweeb/mirror-with-weeb'>@GitHub</a> By <a href='https://github.com/codewithweeb'>Code With Weeb</a></h1>"
+    return "<h1>See @PublicLeechCloneGroup <a href='https://t.me/PublicLeechCloneGroup'>@Telegram</a> By <a href='https://t.me/PublicLeechCloneGroup'>PublicLeechCloneGroup</a></h1>"
 
 @app.errorhandler(Exception)
 def page_not_found(e):
