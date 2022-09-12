@@ -49,8 +49,6 @@ def cancell_all_buttons(update, context):
     buttons = button_build.ButtonMaker()
     buttons.sbutton("Downloading", f"canall {MirrorStatus.STATUS_DOWNLOADING}")
     buttons.sbutton("Uploading", f"canall {MirrorStatus.STATUS_UPLOADING}")
-    buttons.sbutton("Seeding", f"canall {MirrorStatus.STATUS_SEEDING}")
-    buttons.sbutton("Cloning", f"canall {MirrorStatus.STATUS_CLONING}")
     buttons.sbutton("Extracting", f"canall {MirrorStatus.STATUS_EXTRACTING}")
     buttons.sbutton("Archiving", f"canall {MirrorStatus.STATUS_ARCHIVING}")
     buttons.sbutton("Queued", f"canall {MirrorStatus.STATUS_WAITING}")
