@@ -108,10 +108,6 @@ def stats(update, context):
             torrent_direct = 'No Limit Set'
         else:
             torrent_direct = f'{TORRENT_DIRECT_LIMIT}GB/Link'
-        if CLONE_LIMIT is None:
-            clone_limit = 'No Limit Set'
-        else:
-            clone_limit = f'{CLONE_LIMIT}GB/Link'
         if MEGA_LIMIT is None:
             mega_limit = 'No Limit Set'
         else:
@@ -186,18 +182,6 @@ def restart(update, context):
 
 
 
-
-def ping(update, context):
-    if EMOJI_THEME is True:
-        start_time = int(round(time() * 1000))
-        reply = sendMessage("Starting_Ping ⛔", context.bot, update.message)
-        end_time = int(round(time() * 1000))
-        editMessage(f'{end_time - start_time} ms 🔥', reply)
-    else:
-        start_time = int(round(time() * 1000))
-        reply = sendMessage("Starting_Ping ", context.bot, update.message)
-        end_time = int(round(time() * 1000))
-        editMessage(f'{end_time - start_time} ms ', reply)
 
 
 def log(update, context):
@@ -296,8 +280,6 @@ def main():
 
 
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
-    ping_handler = CommandHandler(BotCommands.PingCommand, ping,
-                                  filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
     restart_handler = CommandHandler(BotCommands.RestartCommand, restart,
                                      filters=CustomFilters.owner_filter | CustomFilters.sudo_user, run_async=True)
     help_handler = CommandHandler(BotCommands.HelpCommand,
@@ -306,7 +288,6 @@ def main():
                                    stats, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
     log_handler = CommandHandler(BotCommands.LogCommand, log, filters=CustomFilters.owner_filter | CustomFilters.sudo_user, run_async=True)
     dispatcher.add_handler(start_handler)
-    dispatcher.add_handler(ping_handler)
     dispatcher.add_handler(restart_handler)
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(stats_handler)
