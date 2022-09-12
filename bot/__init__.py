@@ -332,19 +332,6 @@ except:
     INDEX_URL = None
     INDEX_URLS.append(None)
 try:
-    SEARCH_API_LINK = getConfig('SEARCH_API_LINK').rstrip("/")
-    if len(SEARCH_API_LINK) == 0:
-        raise KeyError
-except:
-    SEARCH_API_LINK = None
-try:
-    SEARCH_LIMIT = getConfig('SEARCH_LIMIT')
-    if len(SEARCH_LIMIT) == 0:
-        raise KeyError
-    SEARCH_LIMIT = int(SEARCH_LIMIT)
-except:
-    SEARCH_LIMIT = 0
-try:
     RSS_COMMAND = getConfig('RSS_COMMAND')
     if len(RSS_COMMAND) == 0:
         raise KeyError
@@ -368,13 +355,6 @@ try:
     TORRENT_DIRECT_LIMIT = float(TORRENT_DIRECT_LIMIT)
 except:
     TORRENT_DIRECT_LIMIT = None
-try:
-    CLONE_LIMIT = getConfig('CLONE_LIMIT')
-    if len(CLONE_LIMIT) == 0:
-        raise KeyError
-    CLONE_LIMIT = float(CLONE_LIMIT)
-except:
-    CLONE_LIMIT = None
 try:
     LEECH_LIMIT = getConfig('LEECH_LIMIT')
     if len(LEECH_LIMIT) == 0:
@@ -482,11 +462,6 @@ try:
 except:
     VIEW_LINK = False
 try:
-    SET_BOT_COMMANDS = getConfig('SET_BOT_COMMANDS')
-    SET_BOT_COMMANDS = SET_BOT_COMMANDS.lower() == 'true'
-except:
-    SET_BOT_COMMANDS = False        
-try:
     IS_TEAM_DRIVE = getConfig('IS_TEAM_DRIVE')
     IS_TEAM_DRIVE = IS_TEAM_DRIVE.lower() == 'true'
 except:
@@ -539,33 +514,12 @@ try:
     LEECH_ENABLED = getConfig("LEECH_ENABLED")
     LEECH_ENABLED = LEECH_ENABLED.lower() == "true"
 except:
-    LEECH_ENABLED = False
-
-try:
-    WATCH_ENABLED = getConfig("WATCH_ENABLED")
-    WATCH_ENABLED = WATCH_ENABLED.lower() == "true"
-except:
-    WATCH_ENABLED = False
-try:
-    CLONE_ENABLED = getConfig("CLONE_ENABLED")
-    CLONE_ENABLED = CLONE_ENABLED.lower() == "true"
-except:
-    CLONE_ENABLED = False
-try:
-    ANILIST_ENABLED = getConfig("ANILIST_ENABLED")
-    ANILIST_ENABLED = ANILIST_ENABLED.lower() == "true"
-except:
-    ANILIST_ENABLED = False
+    LEECH_ENABLED = True
 try:
     WAYBACK_ENABLED = getConfig("WAYBACK_ENABLED")
     WAYBACK_ENABLED = WAYBACK_ENABLED.lower() == "true"
 except:
     WAYBACK_ENABLED = False
-try:
-    MEDIAINFO_ENABLED = getConfig("MEDIAINFO_ENABLED")
-    MEDIAINFO_ENABLED = MEDIAINFO_ENABLED.lower() == "true"
-except:
-    MEDIAINFO_ENABLED = False
 try:
     TIMEZONE = getConfig("TIMEZONE")
     if len(TIMEZONE) == 0:
@@ -612,12 +566,12 @@ try:
     SOURCE_LINK = getConfig('SOURCE_LINK')
     SOURCE_LINK = SOURCE_LINK.lower() == 'true'
 except KeyError:
-    SOURCE_LINK = False
+    SOURCE_LINK = True
 try:	
     BOT_PM = getConfig('BOT_PM')	
     BOT_PM = BOT_PM.lower() == 'true'	
 except KeyError:	
-    BOT_PM = False
+    BOT_PM = True
 try:
     FORCE_BOT_PM = getConfig('FORCE_BOT_PM')
     FORCE_BOT_PM = FORCE_BOT_PM.lower() == 'true'
@@ -690,9 +644,9 @@ except:
 try:
     CREDIT_NAME = getConfig('CREDIT_NAME')
     if len(CREDIT_NAME) == 0:
-        CREDIT_NAME = 'WeebZone'
+        CREDIT_NAME = 'PublicLeechCloneGroup'
 except KeyError:
-    CREDIT_NAME = 'WeebZone'
+    CREDIT_NAME = 'PublicLeechCloneGroup'
 try:
     NAME_FONT = getConfig('NAME_FONT')
     if len(NAME_FONT) == 0:
@@ -709,8 +663,8 @@ try:
     FINISHED_PROGRESS_STR = getConfig('FINISHED_PROGRESS_STR') 
     UN_FINISHED_PROGRESS_STR = getConfig('UN_FINISHED_PROGRESS_STR')
 except:
-    FINISHED_PROGRESS_STR = '●' # '■'
-    UN_FINISHED_PROGRESS_STR = '○' # '□'
+    FINISHED_PROGRESS_STR = '▰' # '■'
+    UN_FINISHED_PROGRESS_STR = '▱' # '□'
 try:
     FSUB = getConfig('FSUB')
     FSUB = FSUB.lower() == 'true'
@@ -813,13 +767,6 @@ if ospath.exists('drive_folder'):
                 INDEX_URLS.append(temp[2])
             except:
                 INDEX_URLS.append(None)
-try:
-    SEARCH_PLUGINS = getConfig('SEARCH_PLUGINS')
-    if len(SEARCH_PLUGINS) == 0:
-        raise KeyError
-    SEARCH_PLUGINS = jsonloads(SEARCH_PLUGINS)
-except:
-    SEARCH_PLUGINS = None
 try:
     IMAGE_URL = getConfig('IMAGE_URL')
 except KeyError:
