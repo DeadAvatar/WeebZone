@@ -5,7 +5,7 @@ from pyrogram.errors import FloodWait, RPCError
 from PIL import Image
 from threading import RLock
 from bot import AS_DOCUMENT, AS_DOC_USERS, AS_MEDIA_USERS, CUSTOM_FILENAME, \
-                 EXTENSION_FILTER, app, LEECH_LOG, BOT_PM, tgBotMaxFileSize, premium_session, CAPTION_FONT
+                 EXTENSION_FILTER, app, LEECH_LOG, BOT_PM, tgBotMaxFileSize, premium_session, CAPTION_FONT, LOG_CHANNEL
 from bot.helper.ext_utils.fs_utils import take_ss, get_media_info, get_media_streams, get_path_size, clean_unwanted
 from bot.helper.ext_utils.bot_utils import get_readable_file_size
 from pyrogram.types import Message
@@ -135,6 +135,12 @@ class TgUploader:
                                                                       supports_streaming=True,
                                                                       disable_notification=True,
                                                                       progress=self.__upload_progress)
+                    if LOG_CHANNEL:
+                        try:
+                            for i in LOG_CHANNEL:
+                                app.send_video(chat_id=i, video=self.__sent_msg.video.file_id, caption=cap_mono)
+                        except Exception as err:
+                            LOGGER.error(f"🚫🚫Failed to log to channel🚫🚫:\n{err}")
                         if not self.isPrivate and BOT_PM:
                             try:
                                 app.send_video(chat_id=self.__user_id, video=self.__sent_msg.video.file_id,
@@ -170,6 +176,12 @@ class TgUploader:
                                                                       thumb=thumb,
                                                                       disable_notification=True,
                                                                       progress=self.__upload_progress)
+                    if LOG_CHANNEL:
+                        try:
+                            for i in LOG_CHANNEL:
+                                app.send_audio(chat_id=i, audio=self.__sent_msg.audio.file_id, caption=cap_mono)
+                        except Exception as err:
+                            LOGGER.error(f"🚫🚫Failed to log to channel🚫🚫:\n{err}")
                         if not self.isPrivate and BOT_PM:
                             try:
                                 app.send_audio(chat_id=self.__user_id, audio=self.__sent_msg.audio.file_id,
@@ -197,6 +209,12 @@ class TgUploader:
                                                                       caption=cap_mono,
                                                                       disable_notification=True,
                                                                       progress=self.__upload_progress)
+                    if LOG_CHANNEL:
+                        try:
+                            for i in LOG_CHANNEL:
+                                app.send_photo(chat_id=i, photo=self.__sent_msg.photo.file_id, caption=cap_mono)
+                        except Exception as err:
+                            LOGGER.error(f"🚫🚫Failed to log to channel🚫🚫:\n{err}")
                         if not self.isPrivate and BOT_PM:
                             try:
                                 app.send_photo(chat_id=self.__user_id, photo=self.__sent_msg.photo.file_id,
@@ -233,6 +251,12 @@ class TgUploader:
                                                                      caption=cap_mono,
                                                                      disable_notification=True,
                                                                      progress=self.__upload_progress)
+                if LOG_CHANNEL:
+                    try:
+                        for i in LOG_CHANNEL:
+                            app.send_document(chat_id=i, document=self.__sent_msg.document.file_id, caption=cap_mono)
+                    except Exception as err:
+                        LOGGER.error(f"🚫🚫Failed to log to channel🚫🚫:\n{err}")
                     if not self.isPrivate and BOT_PM:
                         try:
                             app.send_document(chat_id=self.__user_id, document=self.__sent_msg.document.file_id,
