@@ -187,17 +187,17 @@ def log(update, context):
 
 help_string = f'''
 NOTE: Try each command without any perfix to see more detalis.
-/{BotCommands.LeechCommand[0]} or /{BotCommands.LeechCommand[1]}: Start leeching to Telegram.
+/{BotCommands.LeechCommand}: Start leeching to Telegram.
 
-/{BotCommands.ZipLeechCommand[0]} or /{BotCommands.ZipLeechCommand[1]}: Start leeching and upload the file/folder compressed with zip extension.
+/{BotCommands.ZipLeechCommand}: Start leeching and upload the file/folder compressed with zip extension.
 
-/{BotCommands.UnzipLeechCommand[0]} or /{BotCommands.UnzipLeechCommand[1]}: Start leeching and upload the file/folder extracted from any archive extension.
+/{BotCommands.UnzipLeechCommand}: Start leeching and upload the file/folder extracted from any archive extension.
 
-/{BotCommands.QbLeechCommand[0]} or /{BotCommands.QbLeechCommand[1]}: Start leeching using qBittorrent.
+/{BotCommands.QbLeechCommand}: Start leeching using qBittorrent.
 
-/{BotCommands.QbZipLeechCommand[0]} or /{BotCommands.QbZipLeechCommand[1]}: Start leeching using qBittorrent and upload the file/folder compressed with zip extension.
+/{BotCommands.QbZipLeechCommand}: Start leeching using qBittorrent and upload the file/folder compressed with zip extension.
 
-/{BotCommands.QbUnzipLeechCommand[0]} or /{BotCommands.QbUnzipLeechCommand[1]}: Start leeching using qBittorrent and upload the file/folder extracted from any archive extension.
+/{BotCommands.QbUnzipLeechCommand}: Start leeching using qBittorrent and upload the file/folder extracted from any archive extension.
 
 /{BotCommands.LeechSetCommand} [query]: Leech settings.
 
