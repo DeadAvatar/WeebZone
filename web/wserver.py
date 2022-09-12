@@ -234,8 +234,7 @@ function s_validate() {
         </a>
       </div>
       <div class="social">
-        <a href="https://t.me/PublicLeechCloneGroup"><i class="fab fa-github"></i></a>
-        <a href="https://t.me/krn2701"><i class="fab fa-telegram"></i></a>
+        <a href="https://t.me/PublicLeechCloneGroup"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
     <div id="sticks">
