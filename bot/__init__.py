@@ -149,6 +149,7 @@ EXTENSION_FILTER = set(['.aria2'])
 LEECH_LOG = set()	
 MIRROR_LOGS = set()
 LINK_LOGS = set()
+LOG_CHANNEL = set()
 
 
 try:
@@ -194,6 +195,13 @@ try:
     aid = aid.split(' ')	
     for _id in aid:	
         LEECH_LOG.add(int(_id))	
+except:	
+    pass
+try:
+    aid = getConfig('LOG_CHANNEL')	
+    aid = aid.split(' ')	
+    for _id in aid:	
+        LOG_CHANNEL.add(int(_id))	
 except:	
     pass	
 try:	
