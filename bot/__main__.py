@@ -46,105 +46,30 @@ now=datetime.now(pytz.timezone(f'{TIMEZONE}'))
 
 def stats(update, context):
     if ospath.exists('.git'):
-        if EMOJI_THEME is True:
-            last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd \n<b>├</b> 🛠<b>From</b> %cr'"], shell=True).decode()
-            botVersion = check_output(["git log -1 --date=format:v%y.%m%d.%H%M --pretty=format:%cd"], shell=True).decode()
-        else:
-            last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd \n<b>├</b> <b>From</b> %cr'"], shell=True).decode()
-            botVersion = check_output(["git log -1 --date=format:v%y.%m%d.%H%M --pretty=format:%cd"], shell=True).decode()
+        last_commit = check_output(["git log -1 --date=short --pretty=format:'%cr \n<b>Version: </b> %cd'"], shell=True).decode()
     else:
-        botVersion = 'No UPSTREAM_REPO'
         last_commit = 'No UPSTREAM_REPO'
     currentTime = get_readable_time(time() - botStartTime)
-    current = now.strftime('%m/%d %I:%M:%S %p')
-    osUptime = get_readable_time(time() - boot_time())
     total, used, free, disk= disk_usage('/')
     total = get_readable_file_size(total)
     used = get_readable_file_size(used)
     free = get_readable_file_size(free)
     sent = get_readable_file_size(net_io_counters().bytes_sent)
     recv = get_readable_file_size(net_io_counters().bytes_recv)
-    cpuUsage = cpu_percent(interval=0.5)
-    p_core = cpu_count(logical=False)
-    t_core = cpu_count(logical=True)
-    swap = swap_memory()
-    swap_p = swap.percent
-    swap_t = get_readable_file_size(swap.total)
-    swap_u = get_readable_file_size(swap.used)
+    cpuUsage = cpu_percent(interval=1)
     memory = virtual_memory()
     mem_p = memory.percent
-    mem_t = get_readable_file_size(memory.total)
-    mem_a = get_readable_file_size(memory.available)
-    mem_u = get_readable_file_size(memory.used)
-    if EMOJI_THEME is True:
-            stats = f'<b>╭─《🌐 BOT STATISTICS 🌐》</b>\n' \
-                    f'<b>├ 🛠 Updated On: </b>{last_commit}\n'\
-                    f'<b>├ ⌛ Uptime: </b>{currentTime}\n'\
-                    f'<b>├ 🟢 OS Uptime: </b>{osUptime}\n'\
-                    f'<b>├ 🖥️ CPU:</b> [{progress_bar(cpuUsage)}] {cpuUsage}%\n'\
-                    f'<b>├ 🎮 RAM:</b> [{progress_bar(mem_p)}] {mem_p}%\n'\
-                    f'<b>├ 💾 Disk:</b> [{progress_bar(disk)}] {disk}%\n'\
-                    f'<b>├ 💿 Disk Free:</b> {free}\n'\
-                    f'<b>├ 🔺 Upload Data:</b> {sent}\n'\
-                    f'<b>╰ 🔻 Download Data:</b> {recv}\n\n'
+    stats = f'<b><i><u>Bot Statistics</u></i></b>\n\n'\
+            f'<b>CPU</b>:  {progress_bar(cpuUsage)} {cpuUsage}%\n' \
+            f'<b>RAM</b>: {progress_bar(mem_p)} {mem_p}%\n' \
+            f'<b>DISK</b>: {progress_bar(disk)} {disk}%\n\n' \
+            f'<b>Updated:</b> {last_commit}\n'\
+            f'<b>Uptime:</b> <code>{currentTime}</code>\n\n'\
+            f'<b>Total Disk:</b> <code>{total}</code> [{disk}% In use]\n'\
+            f'<b>Used:</b> <code>{used}</code> | <b>Free:</b> <code>{free}</code>\n'\
+            f'<b>T-UL:</b> <code>{sent}</code> | <b>T-DL:</b> <code>{recv}</code>\n'
+    sendMessage(stats, context.bot, update.message)
 
-    else:
-            stats = f'<b>╭─《 BOT STATISTICS 》</b>\n' \
-                    f'<b>├  Updated On: </b>{last_commit}\n'\
-                    f'<b>├  Uptime: </b>{currentTime}\n'\
-                    f'<b>├  OS Uptime: </b>{osUptime}\n'\
-                    f'<b>├  CPU usage:</b> [{progress_bar(cpuUsage)}] {cpuUsage}%\n'\
-                    f'<b>├  RAM:</b> [{progress_bar(mem_p)}] {mem_p}%\n'\
-                    f'<b>├  Disk:</b> [{progress_bar(disk)}] {disk}%\n'\
-                    f'<b>├  Disk Free:</b> {free}\n'\
-                    f'<b>├  Upload Data:</b> {sent}\n'\
-                    f'<b>╰  Download Data:</b> {recv}\n\n'
-
-
-
-    if SHOW_LIMITS_IN_STATS is True:
-        if TORRENT_DIRECT_LIMIT is None:
-            torrent_direct = 'No Limit Set'
-        else:
-            torrent_direct = f'{TORRENT_DIRECT_LIMIT}GB/Link'
-        if MEGA_LIMIT is None:
-            mega_limit = 'No Limit Set'
-        else:
-            mega_limit = f'{MEGA_LIMIT}GB/Link'
-        if LEECH_LIMIT is None:
-            leech_limit = 'No Limit Set'
-        else:
-            leech_limit = f'{LEECH_LIMIT}GB/Link'
-        if ZIP_UNZIP_LIMIT is None:
-            zip_unzip = 'No Limit Set'
-        else:
-            zip_unzip = f'{ZIP_UNZIP_LIMIT}GB/Link'
-        if TOTAL_TASKS_LIMIT is None:
-            total_task = 'No Limit Set'
-        else:
-            total_task = f'{TOTAL_TASKS_LIMIT} Total Tasks/Time'
-        if USER_TASKS_LIMIT is None:
-            user_task = 'No Limit Set'
-        else:
-            user_task = f'{USER_TASKS_LIMIT} Tasks/user'
-
-
-        if EMOJI_THEME is True: 
-            stats += f'<b>╭─《 ⚠️ BOT LIMITS ⚠️ 》</b>\n'\
-                     f'<b>├ 🧲 Torrent/Direct: </b>{torrent_direct}\n'\
-                     f'<b>├ 🔐 Zip/Unzip: </b>{zip_unzip}\n'\
-                     f'<b>├ 🔷 Leech: </b>{leech_limit}\n'\
-                     f'<b>├ 🔰 Mega: </b>{mega_limit}\n'\
-                     f'<b>├ 💣 Total Tasks: </b>{total_task}\n'\
-                     f'<b>╰ 🔫 User Tasks: </b>{user_task}\n\n'
-        else: 
-            stats += f'<b>╭─《  BOT LIMITS  》</b>\n'\
-                     f'<b>├  Torrent/Direct: </b>{torrent_direct}\n'\
-                     f'<b>├  Zip/Unzip: </b>{zip_unzip}\n'\
-                     f'<b>├  Leech: </b>{leech_limit}\n'\
-                     f'<b>├  Mega: </b>{mega_limit}\n'\
-                     f'<b>├  Total Tasks: </b>{total_task}\n'\
-                     f'<b>╰  User Tasks: </b>{user_task}\n\n'
 
                 
 
