@@ -448,8 +448,6 @@ ZIP : {num_archi} | UNZIP : {num_extract} | TOTAL : {tasks}
 
 Limits : T/D : {TORRENT_DIRECT_LIMIT}GB | Z/U : {ZIP_UNZIP_LIMIT}GB
                     L : {LEECH_LIMIT}GB | M : {MEGA_LIMIT}GB
-
-Made with ❤️ by {CREDIT_NAME}
 """
     return stats
 dispatcher.add_handler(
