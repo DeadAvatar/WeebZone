@@ -186,7 +186,6 @@ def log(update, context):
 
 
 help_string = f'''
-NOTE: Try each command without any perfix to see more detalis.
 /{BotCommands.LeechCommand}: Start leeching to Telegram.
 
 /{BotCommands.ZipLeechCommand}: Start leeching and upload the file/folder compressed with zip extension.
