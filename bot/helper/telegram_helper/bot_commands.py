@@ -12,6 +12,7 @@ def getCommand(name: str, command: str):
 class _BotCommands:
     def __init__(self):
         self.StartCommand = getCommand(f'START_COMMAND', f'start{CMD_INDEX}')
+        self.MirrorCommand = getCommand(f'MIRROR_COMMAND', f'mirror{CMD_INDEX}')
         self.CancelMirror = getCommand('CANCEL_COMMAND', f'cancel{CMD_INDEX}')
         self.CancelAllCommand = getCommand('CANCEL_ALL_COMMAND', f'cancelall{CMD_INDEX}')
         self.StatusCommand = getCommand('STATUS_COMMAND', f'status{CMD_INDEX}')
