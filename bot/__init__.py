@@ -15,7 +15,6 @@ from threading import Thread, Lock
 from dotenv import load_dotenv
 from pyrogram import Client, enums
 from asyncio import get_event_loop
-from megasdkrestclient import MegaSdkRestClient, errors as mega_err
 
 main_loop = get_event_loop()
 
