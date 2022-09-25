@@ -24,7 +24,7 @@ from .helper.telegram_helper.filters import CustomFilters
 from .helper.telegram_helper.button_build import ButtonMaker
 from bot.modules.wayback import getRandomUserAgent
 from .modules import authorize, cancel_mirror, mirror_status, mirror_leech, shell, eval, \
-                    delete, leech_settings, wayback, bt_select, sleep
+                    delete, leech_settings, bt_select, sleep
 from datetime import datetime
 
 
