@@ -642,3 +642,97 @@ def psa_bypasser(psa_url):
             links = links + try2link_scrape(exit_gate) + '\n'
         except: pass
     return links
+
+# gofile
+
+def gofile_dl(url,password=""):
+    api_uri = 'https://api.gofile.io'
+    client = requests.Session()
+    res = client.get(api_uri+'/createAccount').json()
+    
+    data = {
+        'contentId': url.split('/')[-1],
+        'token': res['data']['token'],
+        'websiteToken': '12345',
+        'cache': 'true',
+        'password': hashlib.sha256(password.encode('utf-8')).hexdigest()
+    }
+    res = client.get(api_uri+'/getContent', params=data).json()
+
+    content = []
+    for item in res['data']['contents'].values():
+        content.append(item)
+    
+    return {
+        'accountToken': data['token'],
+        'files': content
+    }["files"][0]["link"]
+
+# adfly
+
+def decrypt_url(code):
+    a, b = '', ''
+    for i in range(0, len(code)):
+        if i % 2 == 0: a += code[i]
+        else: b = code[i] + b
+    key = list(a + b)
+    i = 0
+    while i < len(key):
+        if key[i].isdigit():
+            for j in range(i+1,len(key)):
+                if key[j].isdigit():
+                    u = int(key[i]) ^ int(key[j])
+                    if u < 10: key[i] = str(u)
+                    i = j					
+                    break
+        i+=1
+    key = ''.join(key)
+    decrypted = base64.b64decode(key)[16:-16]
+    return decrypted.decode('utf-8')
+
+
+def adfly(url):
+    client = cloudscraper.create_scraper(allow_brotli=False)
+    res = client.get(url).text
+    out = {'error': False, 'src_url': url}
+    try:
+        ysmm = re.findall("ysmm\s+=\s+['|\"](.*?)['|\"]", res)[0]
+    except:
+        out['error'] = True
+        return out
+    url = decrypt_url(ysmm)
+    if re.search(r'go\.php\?u\=', url):
+        url = base64.b64decode(re.sub(r'(.*?)u=', '', url)).decode()
+    elif '&dest=' in url:
+        url = unquote(re.sub(r'(.*?)dest=', '', url))
+    out['bypassed_url'] = url
+    return out
+
+# gplinks
+
+def gplinks(url: str):
+    client = cloudscraper.create_scraper(allow_brotli=False)
+    p = urlparse(url)
+    final_url = f"{p.scheme}://{p.netloc}/links/go"
+    res = client.head(url)
+    header_loc = res.headers["location"]
+    param = header_loc.split("postid=")[-1]
+    req_url = f"{p.scheme}://{p.netloc}/{param}"
+    p = urlparse(header_loc)
+    ref_url = f"{p.scheme}://{p.netloc}/"
+    h = {"referer": ref_url}
+    res = client.get(req_url, headers=h, allow_redirects=False)
+    bs4 = BeautifulSoup(res.content, "html.parser")
+    inputs = bs4.find_all("input")
+    time.sleep(10) # !important
+    data = { input.get("name"): input.get("value") for input in inputs }
+    h = {
+        "content-type": "application/x-www-form-urlencoded",
+        "x-requested-with": "XMLHttpRequest"
+    }
+    time.sleep(10)
+    res = client.post(final_url, headers=h, data=data)
+    try:
+        return res.json()["url"].replace("/","/")
+    except: 
+        return "Error 404 :("
