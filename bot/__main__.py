@@ -22,7 +22,6 @@ from .helper.telegram_helper.bot_commands import BotCommands
 from .helper.telegram_helper.message_utils import sendMessage, sendMarkup, editMessage, sendLogFile, sendPhoto
 from .helper.telegram_helper.filters import CustomFilters
 from .helper.telegram_helper.button_build import ButtonMaker
-from bot.modules.wayback import getRandomUserAgent
 from .modules import authorize, cancel_mirror, mirror_status, mirror_leech, shell, eval, \
                     delete, leech_settings, bt_select, sleep
 from datetime import datetime
@@ -155,7 +154,7 @@ def main():
                     msg = f"Restarted successfully❗\n"
                     msg += f" DATE: {date}\n"
                     msg += f" TIME: {time}\n"
-                    msg += f" TIMEZONE: {TIMEZONE}\n"
+                    msg += f" TIMEZONE: {TIMEZONE}\n\n"
                 else:
                     msg = f"Bot Restarted!\n"
                     msg += f"DATE: {date}\n"
@@ -163,7 +162,7 @@ def main():
                     msg += f"TIMEZONE: {TIMEZONE}"
 
                 for tag, links in data.items():
-                     msg += f"\n{tag}: "
+                     msg += f"\n☠️{tag}: "
                      for index, link in enumerate(links, start=1):
                          msg += f" <a href='{link}'>{index}</a> |"
                          if len(msg.encode()) > 4000:
